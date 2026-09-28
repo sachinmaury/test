@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kodees Labs – Log in or sign up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF2F9; --card:#FFFFFF; --ink:#12213F; --muted:#5B6885; --line:#D3DBEA;
+  --brand:#2848E8; --brand-ink:#FFFFFF; --panel:#12213F; --panel-ink:#E6ECFA; --accent:#FFC940; --err:#C62F3E; --ok:#1E8E5A;
+  --head:'Sora','Segoe UI',system-ui,sans-serif; --body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0C1428;--card:#141F3A;--ink:#EAF0FF;--muted:#9AA8C9;--line:#2A3A63;--brand:#6F8BFF;--brand-ink:#0C1428;--panel:#0A1122;--err:#FF7A86;--ok:#4CD08E}
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:var(--body);background:var(--bg);color:var(--ink);display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+.side{background:var(--panel);color:var(--panel-ink);padding:48px 56px;display:flex;flex-direction:column;justify-content:space-between}
+.logo{font-family:var(--head);font-weight:700;font-size:22px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.logo i{width:28px;height:28px;border-radius:7px;background:var(--accent);display:grid;place-items:center;color:#12213F;font-style:normal;font-size:15px}
+.side h2{font-family:var(--head);font-size:clamp(28px,3.2vw,42px);line-height:1.15;margin:0 0 16px;max-width:14em;letter-spacing:-.02em}
+.side p{margin:0;color:#A9B7DA;max-width:30em;line-height:1.6}
+pre.code{margin:32px 0 0;padding:20px 22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;font:14px/1.7 ui-monospace,Menlo,Consolas,monospace;color:#C9D5F5;overflow-x:auto}
+.k{color:var(--accent)} .s{color:#8FE0B5}
+main{display:grid;place-items:center;padding:32px 24px}
+.card{width:100%;max-width:400px}
+.tabs{display:flex;gap:4px;padding:4px;background:var(--line);border-radius:10px;margin-bottom:28px}
+.tabs button{flex:1;padding:10px;border:0;background:transparent;color:var(--muted);font:500 15px var(--body);border-radius:7px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(18,33,63,.15)}
+h1{font-family:var(--head);font-size:26px;margin:0 0 6px;letter-spacing:-.02em}
+.sub{margin:0 0 24px;color:var(--muted)}
+label{display:block;font-weight:500;font-size:14px;margin:0 0 6px}
+.field{margin-bottom:18px}
+.inp{position:relative}
+input[type=text],input[type=email],input[type=password]{width:100%;padding:12px 14px;font:16px var(--body);color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:8px}
+input:focus,button:focus-visible,a:focus-visible{outline:3px solid color-mix(in srgb,var(--brand) 45%,transparent);outline-offset:1px;border-color:var(--brand)}
+input[aria-invalid=true]{border-color:var(--err)}
+.err{color:var(--err);font-size:13px;margin-top:5px;min-height:0}
+.eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--muted);font:500 13px var(--body);padding:8px;cursor:pointer}
+.row{display:flex;justify-content:space-between;align-items:center;font-size:14px;margin:-4px 0 22px}
+.row label{display:flex;gap:8px;align-items:center;margin:0;font-weight:400}
+a{color:var(--brand);text-decoration:none;font-weight:500}
+a:hover{text-decoration:underline}
+.go{width:100%;padding:13px;border:0;border-radius:8px;background:var(--brand);color:var(--brand-ink);font:500 16px var(--body);cursor:pointer}
+.go:hover{filter:brightness(1.08)}
+.go[disabled]{opacity:.6;cursor:wait}
+.msg{margin-top:16px;font-size:14px;text-align:center}
+.msg.ok{color:var(--ok)} .msg.bad{color:var(--err)}
+.hint{font-size:13px;color:var(--muted);margin-top:5px}
+.terms{font-size:13px;color:var(--muted);margin:0 0 18px;line-height:1.5}
+[hidden]{display:none!important}
+@media (max-width:820px){body{grid-template-columns:1fr}.side{padding:28px 24px;gap:20px}pre.code,.side p{display:none}}
+@media (prefers-reduced-motion:no-preference){.card{animation:in .35s ease-out}@keyframes in{from{opacity:0;transform:translateY(8px)}}}
+</style>
+</head>
+<body>
+<aside class="side">
+  <div class="logo"><i>K</i> Kodees Labs</div>
+  <div>
+    <h2>Build something worth shipping.</h2>
+    <p>Log in to pick up where you left off, or create an account to start.</p>
+    <pre class="code" aria-hidden="true"><span class="k">const</span> lab = <span class="k">await</span> kodees.join({
+  name: <span class="s">"you"</span>,
+  ready: <span class="k">true</span>
+});</pre>
+  </div>
+  <small style="color:#7F8FB8">&copy; <span id="yr"></span> Kodees Labs</small>
+</aside>
+
+<main>
+<div class="card">
+  <div class="tabs" role="tablist">
+    <button role="tab" id="t-login" aria-selected="true" aria-controls="login">Log in</button>
+    <button role="tab" id="t-signup" aria-selected="false" aria-controls="signup">Sign up</button>
+  </div>
+
+  <form id="login" role="tabpanel" aria-labelledby="t-login" novalidate>
+    <h1>Welcome back</h1>
+    <p class="sub">Log in to your Kodees Labs account.</p>
+    <div class="field"><label for="l-email">Email</label>
+      <input type="email" id="l-email" autocomplete="email" required><div class="err" id="l-email-e"></div></div>
+    <div class="field"><label for="l-pass">Password</label>
+      <div class="inp"><input type="password" id="l-pass" autocomplete="current-password" required>
+      <button type="button" class="eye" data-for="l-pass">Show</button></div><div class="err" id="l-pass-e"></div></div>
+    <div class="row"><label><input type="checkbox" id="remember"> Keep me logged in</label><a href="/forgot-password">Forgot password?</a></div>
+    <button class="go" type="submit">Log in</button>
+    <div class="msg" id="l-msg" role="status"></div>
+  </form>
+
+  <form id="signup" role="tabpanel" aria-labelledby="t-signup" hidden novalidate>
+    <h1>Create your account</h1>
+    <p class="sub">It takes less than a minute.</p>
+    <div class="field"><label for="s-name">Full name</label>
+      <input type="text" id="s-name" autocomplete="name" required><div class="err" id="s-name-e"></div></div>
+    <div class="field"><label for="s-email">Email</label>
+      <input type="email" id="s-email" autocomplete="email" required><div class="err" id="s-email-e"></div></div>
+    <div class="field"><label for="s-pass">Password</label>
+      <div class="inp"><input type="password" id="s-pass" autocomplete="new-password" required>
+      <button type="button" class="eye" data-for="s-pass">Show</button></div>
+      <div class="hint">At least 8 characters, with a letter and a number.</div><div class="err" id="s-pass-e"></div></div>
+    <div class="field"><label for="s-pass2">Confirm password</label>
+      <input type="password" id="s-pass2" autocomplete="new-password" required><div class="err" id="s-pass2-e"></div></div>
+    <p class="terms">By signing up you agree to our <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a>.</p>
+    <button class="go" type="submit">Create account</button>
+    <div class="msg" id="s-msg" role="status"></div>
+  </form>
+</div>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+$('yr').textContent = new Date().getFullYear();
+
+/* Tabs */
+function show(which){
+  const login = which === 'login';
+  $('login').hidden = !login; $('signup').hidden = login;
+  $('t-login').setAttribute('aria-selected', login);
+  $('t-signup').setAttribute('aria-selected', !login);
+  history.replaceState(null,'','#'+which);
+}
+$('t-login').onclick = () => show('login');
+$('t-signup').onclick = () => show('signup');
+show(location.hash === '#signup' ? 'signup' : 'login');
+
+/* Show / hide password */
+document.querySelectorAll('.eye').forEach(b => b.onclick = () => {
+  const i = $(b.dataset.for), hidden = i.type === 'password';
+  i.type = hidden ? 'text' : 'password'; b.textContent = hidden ? 'Hide' : 'Show';
+});
+
+/* Validation */
+const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+function setErr(id, text){
+  $(id).setAttribute('aria-invalid', !!text);
+  $(id + '-e').textContent = text || '';
+  return !text;
+}
+
+/* ---- Connect your backend here ----
+   Replace these with a real request, e.g.:
+   fetch('/api/login', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)})
+   Return { ok:true } on success or { ok:false, error:'message' } on failure. */
+async function apiLogin(data){ await new Promise(r=>setTimeout(r,600)); return {ok:true}; }
+async function apiSignup(data){ await new Promise(r=>setTimeout(r,600)); return {ok:true}; }
+
+async function submit(form, msgEl, fn, data, okText){
+  const btn = form.querySelector('.go'); btn.disabled = true; msgEl.className = 'msg'; msgEl.textContent = '';
+  try{
+    const res = await fn(data);
+    msgEl.className = 'msg ' + (res.ok ? 'ok' : 'bad');
+    msgEl.textContent = res.ok ? okText : (res.error || 'Something went wrong. Try again.');
+    // if(res.ok) location.href = '/dashboard';
+  }catch(e){ msgEl.className = 'msg bad'; msgEl.textContent = 'Could not reach the server. Check your connection and try again.'; }
+  btn.disabled = false;
+}
+
+$('login').addEventListener('submit', e => {
+  e.preventDefault();
+  const email = $('l-email').value.trim(), pass = $('l-pass').value;
+  const a = setErr('l-email', emailOk(email) ? '' : 'Enter a valid email address.');
+  const b = setErr('l-pass', pass ? '' : 'Enter your password.');
+  if(a && b) submit(e.target, $('l-msg'), apiLogin, {email, password:pass, remember:$('remember').checked}, 'Logged in. Redirecting…');
+});
+
+$('signup').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = $('s-name').value.trim(), email = $('s-email').value.trim(), p = $('s-pass').value, p2 = $('s-pass2').value;
+  const ok = [
+    setErr('s-name', name ? '' : 'Enter your name.'),
+    setErr('s-email', emailOk(email) ? '' : 'Enter a valid email address.'),
+    setErr('s-pass', (p.length >= 8 && /[A-Za-z]/.test(p) && /\d/.test(p)) ? '' : 'Use at least 8 characters, with a letter and a number.'),
+    setErr('s-pass2', p2 === p && p2 ? '' : 'Passwords do not match.')
+  ].every(Boolean);
+  if(ok) submit(e.target, $('s-msg'), apiSignup, {name, email, password:p}, 'Account created. Check your email to verify it.');
+});
+</script>
+</body>
+</html>
